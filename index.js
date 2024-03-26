@@ -38,11 +38,11 @@ server.post("/api/contact", handelcontactdata);
 server.post("/api/resultdata", async (req, res) => {
   let data = req.body;
   let updateval = { obtainmark: data.obtainmarks, totalmark: data.totalmarks };
-  await registrationmodel.findOneAndUpdate(
+  await registrationmodel.updateOne(
     {
-      $and: [{ checkexamkey: data.examkey }, { email: data.email }],
+      email: data.email,
     },
-    { marks: updateval }
+    { $set: { marks: updateval } }
   );
   res.send({ post: true });
 });
