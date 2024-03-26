@@ -38,7 +38,7 @@ server.post("/api/contact", handelcontactdata);
 server.post("/api/resultdata", async (req, res) => {
   let data = req.body;
   let updateval = { obtainmark: data.obtainmarks, totalmark: data.totalmarks };
-  let update = await registrationmodel.findOneAndUpdate(
+  await registrationmodel.findOneAndUpdate(
     {
       $and: [{ checkexamkey: data.examkey }, { email: data.email }],
     },
