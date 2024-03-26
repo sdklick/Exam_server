@@ -7,7 +7,7 @@ let registrationschema = new mongoose.Schema({
   email: { type: String },
   age: { type: String },
   checkexamkey: { type: String },
-  marks: { type: Object },
+  marks:{},
   findsubject_examcode: { type: Object },
 });
 

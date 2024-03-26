@@ -18,7 +18,7 @@ const { qsetsignin } = require("./controllers/questionsetsignincontroler");
 const {
   adminregis_result,
 } = require("./controllers/adminregis_result_controller");
-const { registrationmodel } = require("./models/registrationdatamodel");
+const { resultmarks } = require("./controllers/resultdata_controller");
 
 const cors = require("cors");
 server.use(cors());
@@ -35,18 +35,7 @@ dbconnect(dbconnecturl);
 server.post("/api/signup", handelsignupdata);
 server.post("/api/registration", handelregisdata);
 server.post("/api/contact", handelcontactdata);
-server.post("/api/resultdata", async (req, res) => {
-  let data = req.body;
-  let updateval = { obtainmark: data.obtainmarks, totalmark: data.totalmarks };
-  await registrationmodel.updateOne(
-    {
-      email: data.email,
-    },
-    { $set: { marks: updateval } }
-  );
-  res.send({ post: true });
-});
-
+server.post("/api/resultdata", resultmarks);
 server.post("/api/question", handelsetquestion);
 server.get("/api/signin", qsetsignin);
 server.post("/api/adminsignin", handeladmincheck);
