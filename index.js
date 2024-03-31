@@ -1,11 +1,10 @@
 const express = require("express");
 const server = express();
+require("dotenv").config();
 //const dbconnecturl = "mongodb://127.0.0.1:27017/examapp";
-const dbconnecturl =
-  process.env.MONGODB_CONNECT_URI ||
-  "mongodb+srv://sumantad827:iamsonu2000@cluster0.05axizh.mongodb.net/examapp?retryWrites=true&w=majority&appName=Cluster0";
+const dbconnecturl = process.env.MONGODB_CONNECT_URI;
 const { dbconnect } = require("./dbconnections");
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT;
 const bodyparser = require("body-parser");
 const { handelsignupdata } = require("./controllers/signupcontroler");
 const { handelcontactdata } = require("./controllers/contactcontroler");
