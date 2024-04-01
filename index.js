@@ -18,6 +18,8 @@ const {
   adminregis_result,
 } = require("./controllers/adminregis_result_controller");
 const { resultmarks } = require("./controllers/resultdata_controller");
+const { registration_count } = require("./controllers/Home_regis_count");
+const { examlistCount } = require("./controllers/Home_examlist_count");
 
 const cors = require("cors");
 server.use(cors());
@@ -41,6 +43,8 @@ server.post("/api/adminsignin", handeladmincheck);
 server.get("/api/resultsearch", handelresultsearch);
 server.get("/api/examlist", handelexamlist);
 server.get("/api/adminregis_result", adminregis_result);
+server.get("/api/registration_count", registration_count);
+server.get("/api/examlist_count", examlistCount);
 server.listen(PORT, () => {
   console.log("server Start");
 });
