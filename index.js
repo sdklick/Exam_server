@@ -4,7 +4,7 @@ require("dotenv").config();
 //const dbconnecturl = "mongodb://127.0.0.1:27017/examapp";
 const dbconnecturl = process.env.MONGODB_CONNECT_URI;
 const { dbconnect } = require("./dbconnections");
-const PORT = process.env.PORT;
+const PORT = process.env.PORT
 const bodyparser = require("body-parser");
 const { handelsignupdata } = require("./controllers/signupcontroler");
 const { handelcontactdata } = require("./controllers/contactcontroler");
@@ -14,9 +14,7 @@ const { handeladmincheck } = require("./controllers/admincheckcontroler");
 const { handelresultsearch } = require("./controllers/resultsearchcontroler");
 const { handelexamlist } = require("./controllers/adminexamlistcontroler");
 const { qsetsignin } = require("./controllers/questionsetsignincontroler");
-const {
-  adminregis_result,
-} = require("./controllers/adminregis_result_controller");
+const { adminregis_result } = require("./controllers/adminregis_r_controller");
 const { resultmarks } = require("./controllers/resultdata_controller");
 const { registration_count } = require("./controllers/Home_regis_count");
 const { examlistCount } = require("./controllers/Home_examlist_count");
@@ -38,7 +36,7 @@ server.post("/api/registration", handelregisdata);
 server.post("/api/contact", handelcontactdata);
 server.post("/api/resultdata", resultmarks);
 server.post("/api/question", handelsetquestion);
-server.get("/api/signin", qsetsignin);
+server.post("/api/signin", qsetsignin);
 server.post("/api/adminsignin", handeladmincheck);
 server.get("/api/resultsearch", handelresultsearch);
 server.get("/api/examlist", handelexamlist);

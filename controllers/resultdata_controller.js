@@ -9,7 +9,7 @@ const resultmarks = async (req, res) => {
     },
     { $set: { marks: updateval } }
   );
-  console.log(data);
+
   res.send({ post: true });
 };
 
