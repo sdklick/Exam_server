@@ -4,7 +4,7 @@ require("dotenv").config();
 //const dbconnecturl = "mongodb://127.0.0.1:27017/examapp";
 const dbconnecturl = process.env.MONGODB_CONNECT_URI;
 const { dbconnect } = require("./dbconnections");
-const PORT = process.env.PORT
+const PORT = process.env.PORT;
 const bodyparser = require("body-parser");
 const { handelsignupdata } = require("./controllers/signupcontroler");
 const { handelcontactdata } = require("./controllers/contactcontroler");
@@ -18,6 +18,7 @@ const { adminregis_result } = require("./controllers/adminregis_r_controller");
 const { resultmarks } = require("./controllers/resultdata_controller");
 const { registration_count } = require("./controllers/Home_regis_count");
 const { examlistCount } = require("./controllers/Home_examlist_count");
+const { questionsetschemamodel } = require("./models/questionsetmodel");
 
 const cors = require("cors");
 server.use(cors());
@@ -43,6 +44,24 @@ server.get("/api/examlist", handelexamlist);
 server.get("/api/adminregis_result", adminregis_result);
 server.get("/api/registration_count", registration_count);
 server.get("/api/examlist_count", examlistCount);
+
+server.get("/api/examinerDashboard", async (req, res) => {
+  let data = await questionsetschemamodel.find();
+  res.send(data);
+});
+
+server.post("/api/examinerupdatedata", async (req, res) => {
+  let reqdata = req.body;
+  let data = await questionsetschemamodel.findOne({ _id: reqdata.dataid });
+  console.log(data);
+  res.send(data);
+});
+
+server.post("/api/examinerdatadelete", async (req, res) => {
+  let reqdata = req.body;
+  let data = await questionsetschemamodel.deleteOne({ _id: reqdata.dataid });
+  res.send(data);
+});
 server.listen(PORT, () => {
   console.log("server Start");
 });
